@@ -1,12 +1,12 @@
 <% if User.current.allowed_to?(:edit_license, nil, :global => true) %>
   <div class="contextual">
-    <%= link_to l(:label_license_edit), edit_license_path(@license), :class => 'icon icon-edit' %> |
-    <%= link_to l(:label_version_edit), edit_license_license_version_path(@license, @license_version), :class => 'icon icon-edit' %> |
-    <% if @license.versions.count > 1 %><%= link_to l(:label_version_delete), license_license_version_path(@license, @license_version), :class => 'icon icon-del', :method => :delete, :confirm => 'Are you sure?' %> |<% end %>
-    <%= link_to l(:label_version_new), new_license_license_version_path(@license), :class => 'icon icon-add' %>
+    <%= link_to l(:label_license_edit), edit_license_path(id: @license), :class => 'icon icon-edit' %> |
+    <%= link_to l(:label_version_edit), edit_license_version_path(id: @license, version_id: @license_version), :class => 'icon icon-edit' %> |
+    <% if @license.versions.count > 1 %><%= link_to l(:label_version_delete), license_version_path(id: @license, version_id: @license_version), :class => 'icon icon-delete', :method => :delete, "data-confirm" => 'Are you sure?' %> |<% end %>
+    <%= link_to l(:label_version_new), new_license_version_path(id: @license), :class => 'icon icon-add' %>
   </div>
 <% end %>
-<h2><%= link_to t(:label_license_plural), licenses_path %> &#187; <%= link_to @license_version.title, license_version_path(@license, @license_version) %></h2>
+<h2><%= link_to t(:label_license_plural), licenses_path %> &#187; <%= link_to @license_version.title, license_version_path(id: @license, version_id: @license_version) %></h2>
 
 <h4><small><%= @license_version.date %><% if @license_version.authors.present? %> - <%= @license_version.authors %><% end %><% if @license_version.url.present? %> - <%= link_to @license_version.url %><% end %>
 </small></h4>

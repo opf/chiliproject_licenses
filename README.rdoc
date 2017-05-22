@@ -1,15 +1,15 @@
-== Redmine/Chiliproject Licenses Plugin
+== OpenProject Licenses Plugin
 
-This plugin allows the redmine/chiliproject administrator to create licenses, manage their versions and link them to projects.
+This plugin allows the OpenProject administrator to create licenses, manage their versions and link them to projects.
 
 == Installation
 
-1. Copy the plugin directory into the vendor/plugins directory
+1. Add the plugin to your `Gemfile.plugins`.
 
 2. Migrate plugin:
    rake db:migrate_plugins
 
-3. Start Redmine
+3. Start OpenProject
 
 Installed plugins are listed and can be configured from 'Admin -> Plugins' screen.
 

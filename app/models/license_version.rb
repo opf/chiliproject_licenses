@@ -6,9 +6,9 @@ class LicenseVersion < ActiveRecord::Base
 
   validates_presence_of :date, :identifier
   validates_uniqueness_of :identifier, :scope => :license_id
-  validates_format_of :identifier, :with => /^#{License::LICENSE_REGEX}$/
+  validates_format_of :identifier, :with => /\A#{License::LICENSE_REGEX}\Z/
 
-  named_scope :for_select, { :include => :license, :order => 'licenses.name ASC, license_versions.date DESC' }
+  scope :for_select, -> { include(:license).order("licenses.name ASC, license_versions.date DESC") }
 
   def to_param
     @to_param ||= identifier.to_s

@@ -1,6 +1,6 @@
 <%= error_messages_for 'license' %>
 
-<% form_for @license, :builder => TabularFormBuilder, :html => {:multipart => true} do |f| %>
+<%= form_for @license, :builder => TabularFormBuilder, :html => {:multipart => true} do |f| %>
 
   <div class="box tabular ">
     <p><%= f.text_field :name, :required => true %></p>
@@ -11,7 +11,7 @@
 
   <% if @license.new_record? %>
     <h3><%= t :label_initial_version %>:</h3>
-    <% f.fields_for :versions do |vf| %>
+    <%= f.fields_for :versions do |vf| %>
       <%= render :partial => 'license_versions/fields', :locals => {:f => vf, :license => @license } %>
     <% end %>
   <% end %>
@@ -20,7 +20,7 @@
   <%= render :partial => 'logos' %>
   <%= render :partial => 'attachments/form' %>
 
-  <%= submit_tag l(@license.new_record? ? :button_create : :button_save) %>
+  <%= submit_tag t(@license.new_record? ? :button_create : :button_save) %>
 
 <% end %>
 

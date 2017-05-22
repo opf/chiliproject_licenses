@@ -1,16 +1,13 @@
 class License < ActiveRecord::Base
-  unloadable
-
-
   LICENSE_REGEX = /[a-zA-Z0-9][\w\-\.]*/
 
-  has_many :versions, :class_name => 'LicenseVersion', :dependent => :destroy, :order => 'license_versions.date DESC'
+  has_many :versions, -> { order("license_versions.date DESC") }, class_name: 'LicenseVersion', dependent: :destroy
 
   has_many :logos, :class_name => "Attachment", :as => :container, :dependent => :destroy
 
   validates_presence_of :name, :identifier
   validates_uniqueness_of :identifier
-  validates_format_of :identifier, :with => /^#{LICENSE_REGEX}$/
+  validates_format_of :identifier, :with => /\A#{LICENSE_REGEX}\Z/
 
   accepts_nested_attributes_for :versions, :allow_destroy => false
   accepts_nested_attributes_for :logos, :allow_destroy => false

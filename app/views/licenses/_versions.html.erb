@@ -8,7 +8,7 @@
       <td><%= link_to_license_version version %><td>
       <% if User.current.allowed_to?(:edit_license, nil, :global => true) %>
         <td>
-          <%= link_to "", edit_license_license_version_path(license, version), :class => 'icon icon-edit', :title => t(:button_edit) %>
+          <%= link_to "", edit_license_version_path(license, version), :class => 'icon icon-edit', :title => t(:button_edit) %>
           <%= link_to "", license_version_path(license, version), :method => :delete, :class => 'icon icon-del', :title => t(:button_delete), :confirm => 'Are you sure?' %>
         </td>
       <% end %>

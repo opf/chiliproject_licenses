@@ -1,10 +1,11 @@
 <%= error_messages_for 'license_version' %>
 
-<% form_for [@license, @license_version], :builder => TabularFormBuilder, :html => {:multipart => true} do |f| %>
+<% form_url = @license_version.try(&:id) ? license_version_path(id: @license, version_id: @license_version) : license_versions_path(id: @license) %>
+<%= form_for @license_version, url: form_url, builder: TabularFormBuilder, html: { multipart: true } do |f| %>
 
-  <%= render :partial => 'fields', :locals => {:f => f, :license => @license } %>
+  <%= render partial: 'fields', locals: { f: f, license: @license } %>
 
-  <%= submit_tag l(@license.new_record? ? :button_create : :button_save) %>
+  <%= submit_tag t(@license.new_record? ? :button_create : :button_save) %>
 
 <% end %>
 

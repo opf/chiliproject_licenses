@@ -12,13 +12,13 @@ class LicensesController < ApplicationController
 
 
   def index
-    @licenses = License.all(:order => :name)
-    @settings = Setting.plugin_chiliproject_licenses
+    @licenses = License.all.order(:name)
+    @settings = Setting.plugin_openproject_licenses
   end
 
   def show
     @latest_version = @license.latest_version
-    redirect_to license_version_path(@license, @latest_version)
+    redirect_to license_version_path(id: @license, license_id: @latest_version)
   end
 
   def edit
@@ -30,38 +30,53 @@ class LicensesController < ApplicationController
   end
 
   def create
-    @license = License.new(params[:license])
-    @license.logo_data = params[:attachments]
+    @license = License.new license_params
 
     if @license.save
       flash[:notice] = t(:notice_successful_create)
       redirect_to @license
     else
-      render :action => :new
+      render action: :new
     end
   end
 
   def update
-    @license.logo_data = params[:attachments]
-    if @license.update_attributes(params[:license])
+    if @license.update_attributes license_params
       flash[:notice] = t(:notice_successful_update)
       redirect_to @license
     else
-      render :action => :edit
+      render action: :edit
     end
   end
 
   def destroy
-    @license.destroy
-    flash[:notice] = t(:notice_successful_delete)
+    if @license.versions.count > 1
+      @license.destroy
+
+      flash[:notice] = t(:notice_successful_delete)
+    else
+      flash[:error] = "Cannot delete last license version"
+    end
+
     redirect_to licenses_url
   end
 
   private
 
   def get_license_by_identifier
-    @license = License.find_by_identifier(params[:id])
+    @license = License.find_by!(identifier: params[:id])
   rescue ActiveRecord::RecordNotFound
     render_404
+  end
+
+  def license_params
+    license_params = params
+      .require(:license)
+      .permit(:name, :short_name, :identifier, :description, :url)
+
+    license_params[:logo_data] = params.require(:license).fetch(:attachments, {}).permit!
+    license_params[:versions_attributes] = params.require(:license).fetch(:versions_attributes, {}).permit!
+
+    license_params
   end
 end

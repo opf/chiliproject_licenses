@@ -19,7 +19,7 @@
       <% if User.current.allowed_to?(:edit_license, nil, :global => true) %>
         &nbsp;
         <%= link_to "", edit_license_path(license), :class => 'icon icon-edit', :title => t(:button_edit) %>
-        <%= link_to "", license, :method => :delete, :class => 'icon icon-del', :title => t(:button_delete), :confirm => 'Are you sure?' %>
+        <%= link_to "", license_path(id: license), :method => :delete, :class => 'icon icon-delete', :title => t(:button_delete), "data-confirm" => 'Are you sure?' %>
       <% end %>
       </h3>
 

@@ -5,10 +5,10 @@
 <div>
   <% if User.current.allowed_to?(:edit_license, nil, :global => true) %>
   <div class="contextual">
-    <%= link_to t(:label_version_new), new_license_license_version_path(@license), :class => 'icon icon-add' %>
+    <%= link_to t(:label_version_new), new_license_version_path(@license), :class => 'icon icon-add' %>
   </div>
   <% end %>
-  <h3><%= LicenseVersion.human_name(:count => 2) %></h3>
+  <h3><%= LicenseVersion.model_name.human(count: 2) %></h3>
 
   <%= render :partial => 'versions', :locals => { :license => @license } %>
 

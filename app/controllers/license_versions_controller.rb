@@ -5,9 +5,9 @@ class LicenseVersionsController < ApplicationController
   helper :attachments
   include AttachmentsHelper
 
-  before_filter :require_admin, :except => :show
-  before_filter :get_license_by_identifier
-  before_filter :get_version_by_identifier, :only => [:show, :edit, :update, :destroy]
+  before_action :require_admin, :except => :show
+  before_action :get_license_by_identifier
+  before_action :get_version_by_identifier, :only => [:show, :edit, :update, :destroy]
 
   def show
   end
@@ -20,21 +20,21 @@ class LicenseVersionsController < ApplicationController
   end
 
   def create
-    @license_version = @license.versions.new(params[:license_version])
+    @license_version = @license.versions.new license_version_params
     if @license_version.save
       flash[:notice] = t(:notice_successful_create)
-      redirect_to license_version_path(:license_id => @license, :id => @license_version)
+      redirect_to license_version_path(id: @license, version_id: @license_version)
     else
-      render :action => :new
+      render action: :new
     end
   end
 
   def update
-    if @license_version.update_attributes(params[:license_version])
+    if @license_version.update license_version_params
       flash[:notice] = t(:notice_successful_update)
-      redirect_to license_version_path(:license_id => @license, :id => @license_version)
+      redirect_to license_version_path(id: @license, version_id: @license_version)
     else
-      render :action => :edit
+      render action: :edit
     end
   end
 
@@ -46,14 +46,20 @@ class LicenseVersionsController < ApplicationController
 
   private
 
+  def license_version_params
+    params
+      .require(:license_version)
+      .permit(:identifier, :date, :authors, :url, :text)
+  end
+
   def get_license_by_identifier
-    @license = License.find_by_identifier(params[:license_id])
+    @license = License.find_by(identifier: params[:id])
   rescue ActiveRecord::RecordNotFound
     render_404
   end
 
   def get_version_by_identifier
-    @license_version = @license.versions.find_by_identifier(params[:id]) if @license
+    @license_version = @license.versions.find_by_identifier(params[:version_id]) if @license
   rescue ActiveRecord::RecordNotFound
     render_404
   end
