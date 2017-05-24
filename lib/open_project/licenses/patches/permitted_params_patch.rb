@@ -8,11 +8,13 @@ module OpenProject
 
         module InstanceMethods
           def project
-            res = super
+            p = super
 
-            require 'pry'; binding.pry
+            project_params = params.require(:project)
 
-            res
+            p[:license_id] = project_params[:license_id] if project_params[:license_id]
+
+            p
           end
         end
       end

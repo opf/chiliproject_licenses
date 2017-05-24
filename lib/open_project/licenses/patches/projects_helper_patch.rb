@@ -4,9 +4,14 @@ module OpenProject
       module ProjectsHelperPatch
         def self.included(base) # :nodoc:
           base.class_eval do
-            def no_results_box
-              title = t('.no_results_title_text', cascade: true)
-              action_text = t('.no_results_content_text')
+            def no_results_box(
+              action_url: nil,
+              display_action: false,
+              custom_title: nil,
+              custom_action_text: nil
+            )
+              title = custom_title || t('.no_results_title_text', cascade: true)
+              action_text = custom_action_text || t('.no_results_content_text')
 
               filters = render_to_string(partial: "projects/license_filter", locals: { license_versions: LicenseVersion.for_select })
               filters = "#{filters}" # to_s won't work on the output buffer
@@ -15,8 +20,8 @@ module OpenProject
                 partial: '/common/no_results',
                 locals: {
                   title_text:  title,
-                  action_text: action_text,
-                  action_url:  ''
+                  action_text: display_action ? action_text : '',
+                  action_url:  action_url || ''
                 }
               )
 
