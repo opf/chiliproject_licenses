@@ -39,7 +39,7 @@ module OpenProject
         permission :view_licenses, licenses: [:show, :index]
       end
 
-      patches [:Project, :ProjectsController, :PermittedParams]
+      patches [:Project, :ProjectsController, :ProjectsHelper, :PermittedParams]
 
       initializer 'proto_plugin.register_hooks' do
         require 'open_project/licenses/hooks'

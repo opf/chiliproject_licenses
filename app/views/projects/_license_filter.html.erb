@@ -1,0 +1,47 @@
+<style type="text/css">
+  #filter-projects {
+    width: 400px;
+    display: flex;
+    margin-bottom: 2em;
+  }
+
+  #filter-projects label {
+    margin-bottom: 0.5em;
+  }
+
+  #filter-project-text {
+    flex: 1;
+    margin-right: 1em;
+  }
+
+  #filter-project-license {
+    flex: 1;
+  }
+</style>
+
+<script type="text/javascript">
+  jQuery(document).ready(function() {
+    jQuery("#license-version-id").change(function() {
+      jQuery("#filter-projects-form").submit();
+    });
+  });
+</script>
+
+<form action="projects" method="get" id="filter-projects-form">
+  <div id="filter-projects">
+    <div id="filter-project-text">
+      <label>Textual Search</label>
+      <input type="text" name="project_name" value="<%= params[:project_name] %>"></input>
+    </div>
+
+    <div id="filter-project-license">
+      <label>License</label>
+      <select id="license-version-id" name="license_version_id">
+        <option></option>
+        <% license_versions.each do |version| %>
+          <option value="<%= version.id %>" <%= params[:license_version_id] == version.id.to_s ? "selected" : "" %>><%= version.title %></option>
+        <% end %>
+      </select>
+    </div>
+  </div>
+</form>
