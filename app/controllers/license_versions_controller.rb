@@ -63,4 +63,16 @@ class LicenseVersionsController < ApplicationController
   rescue ActiveRecord::RecordNotFound
     render_404
   end
+
+  def default_breadcrumb
+    if action_name == 'index'
+      t('label_license_plural')
+    else
+      ActionController::Base.helpers.link_to(t('label_license_plural'), licenses_path)
+    end
+  end
+
+  def show_local_breadcrumb
+    true
+  end
 end

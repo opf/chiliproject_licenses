@@ -1,12 +1,36 @@
-<% if User.current.allowed_to?(:edit_license, nil, :global => true) %>
-  <div class="contextual">
-    <%= link_to l(:label_license_edit), edit_license_path(id: @license), :class => 'icon icon-edit' %> |
-    <%= link_to l(:label_version_edit), edit_license_version_path(id: @license, version_id: @license_version), :class => 'icon icon-edit' %> |
-    <% if @license.versions.count > 1 %><%= link_to l(:label_version_delete), license_version_path(id: @license, version_id: @license_version), :class => 'icon icon-delete', :method => :delete, "data-confirm" => 'Are you sure?' %> |<% end %>
-    <%= link_to l(:label_version_new), new_license_version_path(id: @license), :class => 'icon icon-add' %>
-  </div>
+<% html_title t(:label_license_plural), @license.name, @license_version.title %>
+<% breadcrumb_paths(default_breadcrumb, link_to(@license.name, edit_license_path(id: @license)), @license_version.title) %>
+
+<%= toolbar title: @license_version.title do %>
+  <% if User.current.allowed_to?(:edit_license, nil, :global => true) %>
+    <li class="toolbar-item">
+      <%= link_to new_license_version_path(id: @license), :class => 'button -alt-highlight' do %>
+        <%= op_icon('button--icon icon-add') %>
+        <span class="button--text"><%= t(:label_version_new) %></span>
+      <% end %>
+    </li>
+    <li class="toolbar-item">
+      <%= link_to edit_license_path(id: @license), :class => 'button' do %>
+        <%= op_icon('button--icon icon-edit') %>
+        <span class="button--text"><%= t(:label_license_edit) %></span>
+      <% end %>
+    </li>
+    <li class="toolbar-item">
+      <%= link_to edit_license_version_path(id: @license, version_id: @license_version), :class => 'button' do %>
+        <%= op_icon('button--icon icon-edit') %>
+        <span class="button--text"><%= t(:label_version_edit) %></span>
+      <% end %>
+    </li>
+    <% if @license.versions.count > 1 %>
+      <li class="toolbar-item">
+        <%= link_to license_version_path(id: @license, version_id: @license_version), :class => 'button', :method => :delete, "data-confirm" => 'Are you sure?' do %>
+          <%= op_icon('button--icon icon-delete') %>
+          <span class="button--text"><%= t(:label_version_delete) %></span>
+        <% end %>
+      </li>
+    <% end %>
+  <% end %>
 <% end %>
-<h2><%= link_to t(:label_license_plural), licenses_path %> &#187; <%= link_to @license_version.title, license_version_path(id: @license, version_id: @license_version) %></h2>
 
 <h4><small><%= @license_version.date %><% if @license_version.authors.present? %> - <%= @license_version.authors %><% end %><% if @license_version.url.present? %> - <%= link_to @license_version.url %><% end %>
 </small></h4>

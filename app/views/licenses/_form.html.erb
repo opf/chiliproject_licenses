@@ -2,12 +2,10 @@
 
 <%= form_for @license, :builder => TabularFormBuilder, :html => {:multipart => true} do |f| %>
 
-  <div class="box tabular ">
-    <p><%= f.text_field :name, :required => true %></p>
-    <p><%= f.text_field :short_name %></p>
-    <p><%= f.text_field :identifier, :required => true %></p>
-    <p><%= f.text_field :url %></p>
-  </div>
+  <div class="form--field -required"><%= f.text_field :name, :required => true %></div>
+  <div class="form--field"><%= f.text_field :short_name %></div>
+  <div class="form--field -required"><%= f.text_field :identifier, :required => true %></div>
+  <div class="form--field"><%= f.text_field :url %></div>
 
   <% if @license.new_record? %>
     <h3><%= t :label_initial_version %>:</h3>
@@ -20,7 +18,7 @@
   <%= render :partial => 'logos' %>
   <%= render :partial => 'attachments/form' %>
 
-  <%= submit_tag t(@license.new_record? ? :button_create : :button_save) %>
+  <%= styled_button_tag t(@license.new_record? ? :button_create : :button_save), class: '-highlight -with-icon icon-checkmark' %>
 
 <% end %>
 

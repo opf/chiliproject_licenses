@@ -1,17 +1,20 @@
-<h2><%= link_to t(:label_license_plural), licenses_path %> &#187; <%= @license.name %></h2>
+<% breadcrumb_paths(default_breadcrumb, @license.name) %>
+<%= toolbar title: @license.name %>
+
+<% html_title "#{t(:label_license_plural)} - #{@license.name}" %>
 
 <%= render :partial => 'form' %>
 
 <div>
   <% if User.current.allowed_to?(:edit_license, nil, :global => true) %>
-  <div class="contextual">
-    <%= link_to t(:label_version_new), new_license_version_path(@license), :class => 'icon icon-add' %>
-  </div>
+    <div class="contextual">
+      <%= link_to new_license_version_path(@license) do %>
+        <%= op_icon('icon icon6 icon-add') %>
+        <span><%= t(:label_version_new) %></span>
+      <% end %>
+    </div>
   <% end %>
+
   <h3><%= LicenseVersion.model_name.human(count: 2) %></h3>
-
   <%= render :partial => 'versions', :locals => { :license => @license } %>
-
 </div>
-
-<% html_title "#{t(:label_license_plural)} - #{@license.name}" %>

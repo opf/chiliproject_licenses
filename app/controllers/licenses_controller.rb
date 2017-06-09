@@ -55,7 +55,7 @@ class LicensesController < ApplicationController
 
       flash[:notice] = t(:notice_successful_delete)
     else
-      flash[:error] = "Cannot delete last license version"
+      flash[:error] = t(:notice_error_delete)
     end
 
     redirect_to licenses_url
@@ -78,5 +78,17 @@ class LicensesController < ApplicationController
     license_params[:versions_attributes] = params.require(:license).fetch(:versions_attributes, {}).permit!
 
     license_params
+  end
+
+  def default_breadcrumb
+    if action_name == 'index'
+      t('label_license_plural')
+    else
+      ActionController::Base.helpers.link_to(t('label_license_plural'), licenses_path)
+    end
+  end
+
+  def show_local_breadcrumb
+    true
   end
 end
