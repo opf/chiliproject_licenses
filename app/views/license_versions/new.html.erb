@@ -1,4 +1,6 @@
-<h2><%= link_to t(:label_license_plural), licenses_path %> &#187; <%= link_to @license.name, @license %> &#187; <%= t(:label_license_version_new) %></h2>
+<% html_title t(:label_license_plural), @license.name, t(:label_license_version_new) %>
+<% breadcrumb_paths(default_breadcrumb, link_to(@license.name, @license), t(:label_license_version_new)) %>
+<%= toolbar title: t(:label_license_version_new) %>
 
 <%= render :partial => 'form' %>
 

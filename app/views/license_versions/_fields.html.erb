@@ -1,14 +1,21 @@
-<div class="box tabular ">
-  <p><%= f.text_field :identifier, :required => true %></p>
-  <p><%= f.text_field :date, :size => 10, :required => true %>
-    <% if license.new_record? %>
-      <%= calendar_for('license_versions_attributes_0_date') %>
-    <% else %>
-      <%= calendar_for('license_version_date') %>
-    <% end %>
-  </p>
-  <p><%= f.text_field :authors %><p>
-  <p><%= f.text_field :url %></p>
-  <p><%= f.text_area :text, :cols => 100, :rows => 25, :class => 'wiki-edit', :accesskey => accesskey(:edit) %></p>
-  <%= wikitoolbar_for 'license_version_text' %>
+<div class="form--field -required"><%= f.text_field :identifier, :required => true %></div>
+<div class="form--field -required"><%= f.text_field :date, :size => 10, :required => true %>
+  <% if license.new_record? %>
+    <%= calendar_for('license_versions_attributes_0_date') %>
+  <% else %>
+    <%= calendar_for('license_version_date') %>
+  <% end %>
 </div>
+<div class="form--field"><%= f.text_field :authors %></div>
+<div class="form--field"><%= f.text_field :url %></div>
+
+<div class="form--field">
+  <label class="form--label" for="license_version_text"><%= t(:text) %></label>
+  <span class="form--field-container">
+    <span class="form--text-area-container">
+      <%= text_area_tag 'license[version_text]', @license['version_text'], :cols => 100, :rows => 25, :class => 'wiki-edit', :accesskey => accesskey(:edit) %>
+      <%= wikitoolbar_for 'license_version_text' %>
+    </span>
+  </span>
+</div>
+

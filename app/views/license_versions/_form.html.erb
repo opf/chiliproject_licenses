@@ -5,7 +5,7 @@
 
   <%= render partial: 'fields', locals: { f: f, license: @license } %>
 
-  <%= submit_tag t(@license.new_record? ? :button_create : :button_save) %>
+  <%= styled_button_tag t(@license.new_record? ? :button_create : :button_save), class: '-highlight -with-icon icon-checkmark' %>
 
 <% end %>
 

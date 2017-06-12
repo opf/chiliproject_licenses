@@ -22,6 +22,8 @@ en:
 
   label_logo_plural: "Logos"
 
+  notice_error_delete: "Cannot delete last license version"
+
   field_url: "URL"
   field_authors: "Authors"
   field_date: "Date"
