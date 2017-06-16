@@ -17,7 +17,9 @@ module OpenProject
               end
 
               if params[:project_name].present?
-                @projects = @projects.where("LOWER(name) LIKE ?", "%#{params[:project_name].downcase}%")
+                @projects = @projects.where(
+                  "LOWER(#{Project.table_name}.name) LIKE ?", "%#{params[:project_name].downcase}%"
+                )
               end
 
               respond_to do |format|
