@@ -74,7 +74,7 @@ class LicensesController < ApplicationController
       .require(:license)
       .permit(:name, :short_name, :identifier, :description, :url)
 
-    license_params[:logo_data] = params.require(:license).fetch(:attachments, {}).permit!
+    license_params[:logo_data] = params.fetch(:attachments, {}).permit!
     license_params[:versions_attributes] = params.require(:license).fetch(:versions_attributes, {}).permit!
 
     license_params

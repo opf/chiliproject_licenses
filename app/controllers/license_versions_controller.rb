@@ -53,13 +53,13 @@ class LicenseVersionsController < ApplicationController
   end
 
   def get_license_by_identifier
-    @license = License.find_by(identifier: params[:id])
+    @license = License.find_by!(identifier: params[:id])
   rescue ActiveRecord::RecordNotFound
     render_404
   end
 
   def get_version_by_identifier
-    @license_version = @license.versions.find_by_identifier(params[:version_id]) if @license
+    @license_version = @license.versions.find_by!(identifier: params[:version_id]) if @license
   rescue ActiveRecord::RecordNotFound
     render_404
   end
