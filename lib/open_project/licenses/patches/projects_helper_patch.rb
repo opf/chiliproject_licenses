@@ -13,8 +13,12 @@ module OpenProject
               title = custom_title || t('.no_results_title_text', cascade: true)
               action_text = custom_action_text || t('.no_results_content_text')
 
-              filters = render_to_string(partial: "projects/license_filter", locals: { license_versions: LicenseVersion.for_select })
-              filters = "#{filters}" # to_s won't work on the output buffer
+              filters = ""
+
+              if request.path == "/projects"
+                filters = render_to_string(partial: "projects/license_filter", locals: { license_versions: LicenseVersion.for_select })
+                filters = "#{filters}" # to_s won't work on the output buffer
+              end
 
               s = render_to_string(
                 partial: '/common/no_results',
