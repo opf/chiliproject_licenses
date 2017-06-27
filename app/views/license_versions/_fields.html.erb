@@ -1,13 +1,13 @@
-<div class="form--field -required"><%= f.text_field :identifier, :required => true %></div>
-<div class="form--field -required"><%= f.text_field :date, :size => 10, :required => true %>
+<div class="form--field -required"><%= f.text_field :identifier, :required => true, container_class: '-middle' %></div>
+<div class="form--field -required"><%= f.text_field :date, :size => 10, :required => true, container_class: '-middle'%>
   <% if license.new_record? %>
     <%= calendar_for('license_versions_attributes_0_date') %>
   <% else %>
     <%= calendar_for('license_version_date') %>
   <% end %>
 </div>
-<div class="form--field"><%= f.text_field :authors %></div>
-<div class="form--field"><%= f.text_field :url %></div>
+<div class="form--field"><%= f.text_field :authors, container_class: '-middle' %></div>
+<div class="form--field"><%= f.text_field :url, container_class: '-middle' %></div>
 
 <div class="form--field">
   <label class="form--label" for="license_version_text"><%= t(:text) %></label>
