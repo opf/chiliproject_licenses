@@ -1,4 +1,4 @@
-<p>
-<%= label(:project, :license_id, l(:field_license)) %>
-<%= form.collection_select :license_id, @licenses, :id, :title, :include_blank => true %>
-</p>
+<div class="form--field">
+  <%= form.collection_select :license_id, @licenses, :id, :title, :include_blank => true %>
+</div>
+
