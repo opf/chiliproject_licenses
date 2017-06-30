@@ -61,7 +61,7 @@ module OpenProject
                     link_to_project(project, {}, { class: 'project' }, true)
 
                   if project.license.present?
-                    s << "<div class=\"wiki description\"><b>License:</b> <a href=\"#{project.license.url}\">#{project.license.title}</a></div>"
+                    s << "<div><b>License:</b> <a href=\"#{project.license.url}\">#{project.license.title}</a></div>"
                   end
 
                   unless project.description.blank?
