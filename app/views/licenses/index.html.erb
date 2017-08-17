@@ -10,7 +10,7 @@
   <% end %>
 <% end %>
 
-<%= textilizable @settings[:top_text] %>
+<%= textilizable (@settings[:top_text].empty? ? t(:default_top_text) : @settings[:top_text]) %>
 
 <div class="autoscroll">
   <% @licenses.each do |license| %>
