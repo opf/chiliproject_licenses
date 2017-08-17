@@ -34,6 +34,8 @@ en:
   field_versions:
     date: "Date"
 
+  default_top_text: "Putting files on the Web is not enough when you want to share hardware designs. Copyright law defaults to 'all rights reserved', and other IP rights are similarly restrictive, so designers need to provide certain freedoms to users explicitly. This is the role of licences. Here you will find links to the texts of the most relevant licences we use in the Open Hardware Repository."
+
   activerecord:
     models:
       license:
