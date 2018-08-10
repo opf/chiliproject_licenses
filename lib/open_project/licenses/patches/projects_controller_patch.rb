@@ -6,7 +6,7 @@ module OpenProject
           base.class_eval do
             helper :license_versions
 
-            before_filter :get_licenses, only: %i(new create edit update settings copy)
+            before_action :get_licenses, only: %i(new create edit update settings copy)
           end
         end
 

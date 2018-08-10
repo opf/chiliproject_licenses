@@ -7,8 +7,8 @@ class LicensesController < ApplicationController
   helper :license_versions
   include LicenseVersionsHelper
 
-  before_filter :require_admin, :except => [:index, :show]
-  before_filter :get_license_by_identifier, :except => [:index, :new, :create]
+  before_action :require_admin, :except => [:index, :show]
+  before_action :get_license_by_identifier, :except => [:index, :new, :create]
 
 
   def index
