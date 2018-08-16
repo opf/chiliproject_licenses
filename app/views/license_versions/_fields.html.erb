@@ -1,10 +1,8 @@
-<div class="form--field -required"><%= f.text_field :identifier, :required => true, container_class: '-middle' %></div>
-<div class="form--field -required"><%= f.text_field :date, :size => 10, :required => true, container_class: '-middle'%>
-  <% if license.new_record? %>
-    <%= calendar_for('license_versions_attributes_0_date') %>
-  <% else %>
-    <%= calendar_for('license_version_date') %>
-  <% end %>
+<div class="form--field -required">
+  <%= f.text_field :identifier, :required => true, container_class: '-middle' %>
+</div>
+<div class="form--field -required">
+  <%= f.text_field :date, :size => 10, :required => true, class: "-augmented-datepicker", container_class: '-middle'%>
 </div>
 <div class="form--field"><%= f.text_field :authors, container_class: '-middle' %></div>
 <div class="form--field"><%= f.text_field :url, container_class: '-middle' %></div>
@@ -14,15 +12,16 @@
   <span class="form--field-container">
     <span class="form--text-area-container">
       <%
-        name, value =
+        name, value, id =
           if @license_version
-            ['license_version[text]', @license_version['text']]
+            ['license_version[text]', @license_version['text'], 'license_version_text']
           else
-            ['license[versions_attributes][0][text]', nil]
+            ['license[versions_attributes][0][text]', nil, 'license_versions_attributes_0_text']
           end
       %>
-      <%= text_area_tag name, value, :cols => 100, :rows => 25, :class => 'wiki-edit', :accesskey => accesskey(:edit) %>
-      <%= wikitoolbar_for 'license_version_text' %>
+
+      <%= text_area_tag name, value, cols: 100, rows: 25, class: 'wiki-edit', accesskey: accesskey(:edit) %>
+      <%= wikitoolbar_for id %>
     </span>
   </span>
 </div>
