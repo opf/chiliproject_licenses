@@ -1,4 +1,4 @@
-class CreateLicenseVersions < ActiveRecord::Migration
+class CreateLicenseVersions < ActiveRecord::Migration[5.0]
   def self.up
     return if ActiveRecord::Base.connection.tables.include?("license_versions")
 
