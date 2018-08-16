@@ -20,6 +20,7 @@ en:
 
   label_licenses_settings_intro: "The following two pieces of text will appear at the top/bottom parts of the main Licenses page, respectively."
 
+  label_logo: "Logo"
   label_logo_plural: "Logos"
 
   notice_error_delete: "Cannot delete last license version"

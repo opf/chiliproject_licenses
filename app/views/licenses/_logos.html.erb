@@ -1,4 +1,3 @@
-
 <% if @license.logos.size > 0 %>
-  <%= link_to_attachments @license, :author => false %>
+  <img src="<%= attachment_path @license.attachments.first %>"></img>
 <% end %>
