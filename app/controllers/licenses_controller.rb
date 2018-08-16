@@ -45,7 +45,7 @@ class LicensesController < ApplicationController
   def update
     if @license.update_attributes license_params
       flash[:notice] = t(:notice_successful_update)
-      redirect_to @license
+      redirect_to edit_license_path(@license)
     else
       render action: :edit
     end
@@ -76,7 +76,7 @@ class LicensesController < ApplicationController
       .require(:license)
       .permit(:name, :short_name, :identifier, :description, :url)
 
-    license_params[:logo_data] = params.fetch(:attachments, {}).permit!
+    license_params[:logo_data] = params.fetch(:logo_data, {}).permit!
     license_params[:versions_attributes] = params.require(:license).fetch(:versions_attributes, {}).permit!
 
     license_params
