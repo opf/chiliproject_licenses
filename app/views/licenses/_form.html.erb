@@ -14,12 +14,10 @@
     <% end %>
   <% end %>
 
-  <h3><%= t :label_logo_plural %></h3>
+  <h3><%= t :label_logo %></h3>
   <%= render :partial => 'logos' %>
   <%= render :partial => 'logo_form' %>
 
   <%= styled_button_tag t(@license.new_record? ? :button_create : :button_save), class: '-highlight -with-icon icon-checkmark' %>
 
 <% end %>
-
-

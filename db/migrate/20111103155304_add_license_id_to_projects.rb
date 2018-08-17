@@ -1,4 +1,4 @@
-class AddLicenseIdToProjects < ActiveRecord::Migration
+class AddLicenseIdToProjects < ActiveRecord::Migration[5.0]
   def self.up
     return if Project.columns.include? :license_id
 

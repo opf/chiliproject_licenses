@@ -37,17 +37,16 @@
 
 
 <div class="wiki">
-  <%= textilizable @license_version, :text %>
+  <%= format_text @license_version.text %>
 </div>
 
 <% if @license.versions.count > 1 %>
-<h3><%= t :label_other_versions %></h3>
-<%= render :partial => 'licenses/versions', :locals => {:license => @license, :current_version => @license_version } %>
+  <h3><%= t :label_other_versions %></h3>
+  <%= render :partial => 'licenses/versions', :locals => {:license => @license, :current_version => @license_version } %>
 <% end %>
 
+<% if @license.logos.count > 0 %>
+  <h3><%= t :label_logo %></h3>
 
-<% if @license.logos.count > 1 %>
-<h3><%= t :label_logo_plural %></h3>
-
-<%= render :partial => 'licenses/logos' %>
+  <%= render :partial => 'licenses/logos' %>
 <% end %>

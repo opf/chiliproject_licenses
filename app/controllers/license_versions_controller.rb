@@ -1,5 +1,6 @@
-
 class LicenseVersionsController < ApplicationController
+  layout "no_menu"
+
   unloadable
 
   helper :attachments

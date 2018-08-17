@@ -4,10 +4,12 @@ en:
   label_license: "License"
   label_license_plural: "Licenses"
   label_license_new: "New license"
+  label_license_show: "Show license"
   label_license_edit: "Edit license"
 
   label_license_version: "Version"
   label_license_version_plural: "Versions"
+  label_license_version_show: "Show Version"
   label_license_version_new: "Add Version"
 
   label_version_edit: "Edit version"
@@ -20,6 +22,7 @@ en:
 
   label_licenses_settings_intro: "The following two pieces of text will appear at the top/bottom parts of the main Licenses page, respectively."
 
+  label_logo: "Logo"
   label_logo_plural: "Logos"
 
   notice_error_delete: "Cannot delete last license version"

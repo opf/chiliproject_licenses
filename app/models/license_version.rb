@@ -17,5 +17,4 @@ class LicenseVersion < ActiveRecord::Base
   def title
     "#{license.safe_short_name} #{identifier}"
   end
-
 end

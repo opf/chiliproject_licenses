@@ -63,7 +63,7 @@ class License < ActiveRecord::Base
   private
 
   def add_logos
-    Attachment.attach_files(self, logo_data)
+    attach_files logo_data
+    attachments.each(&:save!)
   end
-
 end

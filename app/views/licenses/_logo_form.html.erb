@@ -39,7 +39,7 @@ See doc/COPYRIGHT.rdoc for more details.
       </div>
       <div class="form--field">
         <label class="form--label">
-          <%= l(:label_optional_description) %>
+          <%= t(:label_optional_description) %>
         </label>
         <div class="form--text-field-container">
           <%= text_field_tag 'logo_data[1][description]', '', size: 38, id: nil %>
@@ -47,8 +47,4 @@ See doc/COPYRIGHT.rdoc for more details.
       </div>
     </div>
   </div>
-  <span class="add_another_file">
-    <%= link_to l(:label_add_another_file), '#', onclick: 'addFileField(); return false;' %>
-    (<%= t(:label_max_size) %>: <%= number_to_human_size(Setting.attachment_max_size.to_i.kilobytes) %>)
-  </span>
 </fieldset>
