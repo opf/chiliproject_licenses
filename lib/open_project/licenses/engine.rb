@@ -41,6 +41,10 @@ module OpenProject
 
       patches [:Project, :ProjectsController, :PermittedParams]
 
+      initializer 'licenses.traits' do
+        require 'open_project/licenses/traits/project_settings_controller'
+      end
+
       initializer 'proto_plugin.register_hooks' do
         require 'open_project/licenses/hooks'
       end
