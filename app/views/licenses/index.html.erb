@@ -1,0 +1,33 @@
+<% html_title t(:label_license_plural) %>
+<%= toolbar title: t(:label_license_plural) do %>
+  <% if User.current.allowed_to?(:add_license, nil, :global => true) %>
+    <li class="toolbar-item">
+      <%= link_to new_license_path, :class => 'button -alt-highlight' do %>
+        <%= op_icon('button--icon icon-add') %>
+        <span class="button--text"><%= t(:label_license)  %></span>
+      <% end %>
+    </li>
+  <% end %>
+<% end %>
+
+<%= format_text @settings[:top_text] %>
+
+<div class="autoscroll">
+  <% @licenses.each do |license| %>
+    <div class="license">
+
+      <h3><%= link_to_license license %>
+      <% if User.current.allowed_to?(:edit_license, nil, :global => true) %>
+        &nbsp;
+        <%= link_to "", license_path(license), :class => 'icon icon6 icon-search', :title => t(:label_license_show) %>
+        <%= link_to "", edit_license_path(license), :class => 'icon icon6 icon-edit', :title => t(:button_edit) %>
+        <%= link_to "", license_path(id: license), :method => :delete, :class => 'icon icon6 icon-delete', :title => t(:button_delete), "data-confirm" => t(:text_are_you_sure) %>
+      <% end %>
+      </h3>
+
+      <%= render :partial => 'versions', :locals => {:license => license} %>
+    </div>
+  <% end %>
+</div>
+
+<%= format_text @settings[:bottom_text] %>

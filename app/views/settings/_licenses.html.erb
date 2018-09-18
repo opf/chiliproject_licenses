@@ -1,0 +1,11 @@
+<p><%= t(:label_licenses_settings_intro) %></p>
+
+<p>
+<label><%= t(:field_top_text) %></label><%= text_area_tag 'settings[top_text]', @settings['top_text'], :rows => 5, :class => 'wiki-edit' %>
+</p>
+<%= wikitoolbar_for 'settings_top_text' %>
+
+<p>
+<label><%= t(:field_bottom_text) %></label><%= text_area_tag 'settings[bottom_text]', @settings['bottom_text'], :rows => 5, :class => 'wiki-edit' %>
+</p>
+<%= wikitoolbar_for 'settings_bottom_text' %>

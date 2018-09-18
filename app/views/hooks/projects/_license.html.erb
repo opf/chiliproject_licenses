@@ -1,0 +1,6 @@
+<% if @project.license.present? %>
+  <div class="licenses box">
+    <h3><%= t(:label_license) %></h3>
+    <p><%= link_to_license_version @project.license %></p>
+  </div>
+<% end %>

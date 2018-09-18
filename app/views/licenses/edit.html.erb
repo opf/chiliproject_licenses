@@ -1,0 +1,20 @@
+<% breadcrumb_paths(default_breadcrumb, @license.name) %>
+<%= toolbar title: @license.name %>
+
+<% html_title "#{t(:label_license_plural)} - #{@license.name}" %>
+
+<%= render :partial => 'form' %>
+
+<div>
+  <h3><%= LicenseVersion.model_name.human(count: 2) %></h3>
+  <%= render :partial => 'versions', :locals => { :license => @license } %>
+
+  <% if User.current.allowed_to?(:edit_license, nil, :global => true) %>
+    <div class="generic-table--action-buttons">
+      <%= link_to new_license_version_path(@license), :class => 'button -alt-highlight' do %>
+        <%= op_icon('button--icon icon-add') %>
+        <span class="button--text"><%= t(:label_version) %></span>
+      <% end %>
+    </div>
+  <% end %>
+</div>

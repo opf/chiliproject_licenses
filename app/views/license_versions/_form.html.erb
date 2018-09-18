@@ -1,0 +1,11 @@
+<%= error_messages_for 'license_version' %>
+
+<% form_url = @license_version.try(&:id) ? license_version_path(id: @license, version_id: @license_version) : license_versions_path(id: @license) %>
+<%= form_for @license_version, url: form_url, builder: TabularFormBuilder, html: { multipart: true } do |f| %>
+
+  <%= render partial: 'fields', locals: { f: f, license: @license } %>
+
+  <%= styled_button_tag t(@license.new_record? ? :button_create : :button_save), class: '-highlight -with-icon icon-checkmark' %>
+
+<% end %>
+
