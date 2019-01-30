@@ -48,6 +48,8 @@ module OpenProject
       initializer 'proto_plugin.register_hooks' do
         require 'open_project/licenses/hooks'
       end
+
+      assets %w(licenses/licenses.css)
     end
   end
 end

@@ -83,14 +83,14 @@ class LicensesController < ApplicationController
   end
 
   def default_breadcrumb
-    if action_name == 'index'
-      t('label_license_plural')
-    else
-      ActionController::Base.helpers.link_to(t('label_license_plural'), licenses_path)
-    end
+    ActionController::Base.helpers.link_to(t('label_license_plural'), licenses_path)
   end
 
   def show_local_breadcrumb
-    true
+    if action_name == 'index'
+      false
+    else
+      true
+    end
   end
 end

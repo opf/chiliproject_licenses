@@ -1,3 +1,8 @@
+<% content_for :header_tags do %>
+    <%= stylesheet_link_tag 'licenses/licenses', plugin: 'openproject_licenses' %>
+<% end %>
+
+
 <% html_title t(:label_license_plural) %>
 <%= toolbar title: t(:label_license_plural) do %>
   <% if User.current.allowed_to?(:add_license, nil, :global => true) %>
